@@ -1,7 +1,7 @@
 package com.example.mytask.Repositories
 
 import com.example.mytask.Model.Response.BaseApiResponse
-import com.example.mytask.Model.Response.PostResponse
+import com.example.mytask.Model.Response.ProductResponse
 import com.example.mytask.Utils.NetworkResult
 import com.example.mytask.remote.RemoteDataSource
 import dagger.hilt.android.scopes.ActivityRetainedScoped
@@ -12,11 +12,11 @@ import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 @ActivityRetainedScoped
-class PostRespository @Inject constructor(private val remoteDataSource: RemoteDataSource) :
+class ProductRespository @Inject constructor(private val remoteDataSource: RemoteDataSource) :
     BaseApiResponse() {
-    suspend fun getPostData(): Flow<NetworkResult<ArrayList<PostResponse>>> {
-        return flow<NetworkResult<ArrayList<PostResponse>>> {
-            emit(safeApiCall { remoteDataSource.getPostData() })
+    suspend fun getProductData(): Flow<NetworkResult<ArrayList<ProductResponse>>> {
+        return flow<NetworkResult<ArrayList<ProductResponse>>> {
+            emit(safeApiCall { remoteDataSource.getProductData() })
         }.flowOn(Dispatchers.IO)
     }
 }

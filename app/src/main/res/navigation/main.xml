@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/oneFragment"
-        android:name="com.example.mytask.Fragment.OneFragment"
+        android:name="com.example.mytask.Fragment.ProductListFragment"
         android:label="fragment_one"
-        tools:layout="@layout/fragment_one">
+        tools:layout="@layout/fragment_product_list">
         <action
             android:id="@+id/action_oneFragment_to_detailsFragment"
             app:destination="@id/detailsFragment"

@@ -1,7 +1,7 @@
 package com.example.mytask.remote
 
 
-import com.example.mytask.Model.Response.PostResponse
+import com.example.mytask.Model.Response.ProductResponse
 import retrofit2.Response
 
 import retrofit2.http.GET
@@ -9,8 +9,8 @@ import retrofit2.http.GET
 
 interface ApiService {
 
-    @GET("posts")
-    suspend fun getPost(): Response<ArrayList<PostResponse>>
+    @GET("products")
+    suspend fun getProduct(): Response<ArrayList<ProductResponse>>
 
 
 }

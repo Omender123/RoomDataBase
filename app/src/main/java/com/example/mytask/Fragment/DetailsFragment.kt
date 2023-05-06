@@ -6,14 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.mytask.Model.Response.PostResponse
-import com.example.mytask.R
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.mytask.Model.Response.ProductResponse
 import com.example.mytask.databinding.FragmentDetailsBinding
 
 
 class DetailsFragment : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
-     var postData: PostResponse ?= null
+    var ProductData: ProductResponse? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,16 +26,26 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding =  FragmentDetailsBinding.inflate(inflater, container, false)
+        binding = FragmentDetailsBinding.inflate(inflater, container, false)
 
-        postData = arguments?.getSerializable("postData") as? PostResponse
-        Log.e("dashboradResponse", "shshsh" + postData)
+        ProductData = arguments?.getSerializable("ProductData") as? ProductResponse
+        Log.e("dashboradResponse", "shshsh" + ProductData)
 
-        binding.txtId.text = "Id : "+postData?.id
-        binding.txtUserid.text = "UserId : "+postData?.userId
-        binding.txtTitle.text = "Title : "+postData?.title
-        binding.txtBody.text = "Body : "+postData?.body
+        Glide.with(requireActivity())
+            .asBitmap()
+            .load(ProductData?.image)
+            .thumbnail(0.05f)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(binding.image)
 
+        binding.name.text = ProductData?.title
+        binding.txtDes.text = ProductData?.description
+        binding.price.text = "Rs. " + ProductData?.price
+
+
+        binding.back.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
 
         return binding.root
     }

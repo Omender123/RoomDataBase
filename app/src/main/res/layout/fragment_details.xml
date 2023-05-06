@@ -1,45 +1,296 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:isScrollContainer="true"
     android:orientation="vertical"
-    android:padding="15dp"
     tools:context=".Fragment.DetailsFragment">
 
-    <TextView
-        android:id="@+id/txt_Userid"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/linear"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="450dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:elevation="3dp"
+
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:elevation="3dp"
+
+                android:src="@drawable/ic_back_arrow" />
+
+            <ImageView
+                android:id="@+id/img_fav"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="15dp"
+                android:elevation="3dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toStartOf="@+id/img_cart"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_circle_heat" />
+
+            <ImageView
+                android:id="@+id/img_cart"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:elevation="3dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/ic_circle_cart" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_below="@id/image"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:background="@color/purple_700" />
+
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/poppins_light"
+                android:textColor="#25232f"
+                android:textFontWeight="600"
+                android:textSize="17dp" />
+
+            <TextView
+                android:id="@+id/txt_des"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/poppins_light"
+                android:textColor="#B325232F"
+                android:textFontWeight="500"
+                android:textSize="15dp" />
+
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_des"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/poppins_light"
+                android:textColor="#1b1d2b"
+                android:textFontWeight="800"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/dis_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_des"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/price"
+                android:background="@drawable/striking_text"
+                android:fontFamily="@font/poppins_light"
+                android:foreground="@drawable/striking_text"
+                android:text="Rs. 2500"
+                android:textColor="#991B1D2B"
+                android:textFontWeight="800"
+                android:textSize="20dp" />
+
+
+            <TextView
+                android:id="@+id/txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/price"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="( 43% OFF )"
+                android:textColor="@color/purple_700"
+                android:textFontWeight="800"
+                android:textSize="18dp" />
+
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_below="@id/txt"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:background="#f2f2f2" />
+
+
+            <TextView
+                android:id="@+id/txt1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view1"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="Size"
+                android:textColor="#B3686868"
+                android:textFontWeight="800"
+                android:textSize="18sp" />
+
+
+            <TextView
+                android:id="@+id/txt2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt1"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/corner_20"
+                android:fontFamily="@font/poppins_light"
+                android:paddingStart="15dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="10dp"
+                android:text="XL"
+                android:textColor="#CC6E6E6E"
+                android:textFontWeight="700" />
+
+            <TextView
+                android:id="@+id/txt3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt1"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/corner_20"
+                android:fontFamily="@font/poppins_light"
+                android:paddingStart="15dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="15dp"
+                android:layout_toEndOf="@+id/txt2"
+                android:paddingBottom="10dp"
+                android:text="XXL"
+                android:textColor="#CC6E6E6E"
+                android:textFontWeight="700" />
+
+            <TextView
+                android:id="@+id/txt4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt1"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/txt3"
+                android:background="@drawable/corner_20"
+                android:fontFamily="@font/poppins_light"
+                android:paddingStart="15dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="10dp"
+                android:text="L"
+                android:textColor="#CC6E6E6E"
+                android:textFontWeight="700" />
+
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_light"
-        android:text="UserId : 1"
-        android:textColor="#383838" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
-    <TextView
-        android:id="@+id/txt_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins_light"
-        android:text="id : 1"
-        android:textColor="#383838" />
-
-    <TextView
-        android:id="@+id/txt_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_light"
-        android:layout_marginTop="10dp"
-        android:text="title : qui est esse"
-        android:textColor="#383838" />
-
-    <TextView
-        android:id="@+id/txt_body"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_light"
-        android:layout_marginTop="10dp"
-        android:text="Body : qui est esse"
-        android:textColor="#383838" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="2dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/corner_8"
+            android:drawableStart="@drawable/ic_heart"
+            android:drawablePadding="10dp"
+            android:drawableTint="#5b5b5b"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="start|center"
+            android:paddingStart="15dp"
+            android:text="Add to Wishlist"
+            android:textColor="#5b5b5b"
+            android:textFontWeight="500"
+            android:textSize="14dp" />
 
 
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="2dp"
+            android:layout_weight="1"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:background="@drawable/corner_8"
+            android:backgroundTint="#de1b46"
+            android:drawableStart="@drawable/ic_cart"
+            android:drawablePadding="15dp"
+            android:drawableTint="@color/white"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="start|center"
+            android:paddingStart="15dp"
+            android:text="Add to bag"
+            android:textColor="@color/white"
+            android:textFontWeight="600"
+            android:textSize="14dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

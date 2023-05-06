@@ -13,30 +13,41 @@
         android:orientation="vertical"
         android:padding="15dp">
 
-        <TextView
-            android:id="@+id/txt_Userid"
+        <ImageView
+            android:id="@+id/image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_light"
-            android:text="UserId : 1"
-            android:textColor="#383838" />
+            android:layout_height="100dp"
+            android:background="@drawable/corner_10"
+            android:clipToOutline="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher" />
 
         <TextView
-            android:id="@+id/txt_id"
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
             android:fontFamily="@font/poppins_light"
-            android:text="id : 1"
-            android:textColor="#383838" />
+            android:maxLines="2"
+            android:text="Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops"
+            android:textColor="@color/black"
+            android:textFontWeight="700"
+            android:textSize="15dp" />
 
         <TextView
-            android:id="@+id/txt_title"
+            android:id="@+id/price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
             android:fontFamily="@font/poppins_light"
-            android:text="title : qui est esse"
-            android:textColor="#383838" />
-
+            android:singleLine="true"
+            android:text="Rs. 109.95"
+            android:textColor="@color/black"
+            android:textFontWeight="900"
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

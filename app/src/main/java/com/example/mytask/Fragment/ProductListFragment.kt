@@ -1,11 +1,9 @@
 package com.example.mytask.Fragment
 
 import android.app.Application
-import android.content.Intent
 
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,28 +17,28 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mytask.Adapter.PostAdapter
-import com.example.mytask.Model.Response.PostResponse
+import com.example.mytask.Adapter.ProductAdapter
+import com.example.mytask.Model.Response.ProductResponse
 import com.example.mytask.R
-import com.example.mytask.Service.MyAccessibilityService
 import com.example.mytask.Utils.NetworkResult
 import com.example.mytask.Utils.Utils
-import com.example.mytask.ViewModel.PostViewModel
-import com.example.mytask.databinding.FragmentOneBinding
-import com.example.mytask.roomdata.PostDataViewModelFactory
-import com.example.mytask.roomdata.PostDataViewModelOne
+import com.example.mytask.ViewModel.ProductViewModel
+import com.example.mytask.databinding.FragmentProductListBinding
+import com.example.mytask.roomdata.ProductDataViewModelFactory
+import com.example.mytask.roomdata.ProductDataViewModelOne
 import dagger.hilt.android.AndroidEntryPoint
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.support.v4.startService
+
 
 
 @AndroidEntryPoint
-class OneFragment : Fragment(), PostAdapter.OnClickListener {
-    private lateinit var binding: FragmentOneBinding
-    private val postViewModel: PostViewModel by viewModels()
-    private lateinit var model: PostDataViewModelOne
+class ProductListFragment : Fragment(), ProductAdapter.OnClickListener {
+    private lateinit var binding: FragmentProductListBinding
+    private val ProductViewModel: ProductViewModel by viewModels()
+    private lateinit var model: ProductDataViewModelOne
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,17 +51,19 @@ class OneFragment : Fragment(), PostAdapter.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentOneBinding.inflate(inflater, container, false)
+        binding = FragmentProductListBinding.inflate(inflater, container, false)
 
 
         val modelfactory =
-            PostDataViewModelFactory(requireContext().applicationContext as Application)
+            ProductDataViewModelFactory(requireContext().applicationContext as Application)
 
-        model = ViewModelProvider(this, modelfactory).get(PostDataViewModelOne::class.java)
+        model = ViewModelProvider(this, modelfactory).get(ProductDataViewModelOne::class.java)
 
         if (!Utils.hasInternetConnection(requireContext())) {
+            binding.progressCircular.visibility = View.VISIBLE
 
-            model.allpostData.observe(viewLifecycleOwner, Observer {
+            model.allProductData.observe(viewLifecycleOwner, Observer {
+                binding.progressCircular.visibility = View.GONE
                 if (it.size > 0) {
                     setData(it)
                 }
@@ -71,28 +71,27 @@ class OneFragment : Fragment(), PostAdapter.OnClickListener {
             })
         } else {
 
-            postViewModel.fetchPostData()
-            GetPostDataObservel();
+            ProductViewModel.fetchProductData()
+            GetProductDataObservel();
         }
 
 
 
 
 
-        binding.floating.setOnClickListener {
-            val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-            startActivity(intent)
-        }
+       
 
         return binding.root
     }
 
-    private fun GetPostDataObservel() {
+    private fun GetProductDataObservel() {
+        binding.progressCircular.visibility = View.VISIBLE
 
-        postViewModel.GetPostData.observe(viewLifecycleOwner) { response ->
+        ProductViewModel.GetProductData.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
 
+                    binding.progressCircular.visibility = View.GONE
                     response.data?.let {
                         setData(it)
 
@@ -111,7 +110,7 @@ class OneFragment : Fragment(), PostAdapter.OnClickListener {
                 }
 
                 is NetworkResult.Error -> {
-
+                    binding.progressCircular.visibility = View.GONE
                     Toast.makeText(
                         requireContext(),
                         response.message,
@@ -122,27 +121,27 @@ class OneFragment : Fragment(), PostAdapter.OnClickListener {
                 }
 
                 is NetworkResult.Loading -> {
-
+                    binding.progressCircular.visibility = View.GONE
                 }
             }
         }
     }
 
-    override fun OnItemClickListener(Postdata: List<PostResponse>, position: Int) {
+    override fun OnItemClickListener(Productdata: List<ProductResponse>, position: Int) {
 
         var data = bundleOf()
-        data.putSerializable("postData", Postdata[position])
+        data.putSerializable("ProductData", Productdata[position])
         findNavController().navigate(R.id.action_oneFragment_to_detailsFragment, data)
     }
 
 
-    fun setData(data: List<PostResponse>) {
+    fun setData(data: List<ProductResponse>) {
         val mLayoutManager1: RecyclerView.LayoutManager =
-            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            GridLayoutManager(context,2, RecyclerView.VERTICAL, false)
         binding.recyclerView.setLayoutManager(mLayoutManager1)
         binding.recyclerView.setItemAnimator(DefaultItemAnimator())
         var adapter =
-            PostAdapter(data, requireContext(), this);
+            ProductAdapter(data, requireContext(), this);
         binding.recyclerView.setAdapter(adapter)
     }
 
